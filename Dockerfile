@@ -1,7 +1,6 @@
 FROM --platform=linux/amd64 mambaorg/micromamba:0.23.1 as build
 
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
-ARG PYTHON_VERSION=3.10
 
 RUN micromamba install --yes -c conda-forge \
     git pip python=$PYTHON_VERSION click typer \
