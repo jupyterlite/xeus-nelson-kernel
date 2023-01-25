@@ -1,0 +1,15 @@
+name: xeus-nelson-kernel-docs
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.10
+  - pip
+  - pydata-sphinx-theme
+  - yarn
+  - jupyterlab
+  - pip:
+    - jupyterlite
+    - jupyterlite-sphinx
+    - jupyterlite-xeus-nelson
