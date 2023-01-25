@@ -1,11 +1,6 @@
-# jupyterlite-xeus-lua-kernel
+# jupyterlite-xeus-nelson-kernel
 
-[![Github Actions Status](https://github.com/jupyterlite/xeus-lua-kernel/workflows/Build/badge.svg)](https://github.com/jupyterlite/xeus-lua-kernel/actions/workflows/build.yml)
-
-A Lua kernel for JupyterLite running in the browser.
-
-![jupyterlite-xeus-lua](https://user-images.githubusercontent.com/591645/136570953-9bae67ad-fca6-436a-99e8-4cb6b0536d8c.gif)
-
+A NelSon kernel for JupyterLite running in the browser.
 
 ## Requirements
 
@@ -16,7 +11,7 @@ A Lua kernel for JupyterLite running in the browser.
 To install the extension, execute:
 
 ```bash
-pip install jupyterlite_xeus_lua
+pip install jupyterlite_xeus_nelson
 ```
 
 Then build your JupyterLite site:
@@ -30,7 +25,7 @@ jupyter lite build
 To remove the extension, execute:
 
 ```bash
-pip uninstall jupyterlite_xeus_lua
+pip uninstall jupyterlite_xeus_nelson
 ```
 
 ## Contributing
@@ -45,7 +40,7 @@ The `jlpm` command is JupyterLab's pinned version of
 
 ```bash
 # Clone the repo to your local environment
-# Change directory to the jupyterlite_xeus_lua directory
+# Change directory to the jupyterlite_xeus_nelson directory
 # Install package in development mode
 python -m pip install -e .
 
@@ -70,12 +65,12 @@ With the watch command running, every saved change will immediately be built loc
 ### Development uninstall
 
 ```bash
-pip uninstall jupyterlite_xeus_lua
+pip uninstall jupyterlite_xeus_nelson
 ```
 
 In development mode, you will also need to remove the symlink created by `jupyter labextension develop`
 command. To find its location, you can run `jupyter labextension list` to figure out where the `labextensions`
-folder is located. Then you can remove the symlink named `jupyterlite-xeus-lua` within that folder.
+folder is located. Then you can remove the symlink named `jupyterlite-xeus-nelson` within that folder.
 
 ### Packaging the extension
 
