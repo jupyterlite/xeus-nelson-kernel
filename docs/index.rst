@@ -1,17 +1,18 @@
 xeus-nelson in JupyterLite 🚀🪐
 ===============================
 
-The `Nelson <https://github.com/Nelson-numerical-software/nelson>`_ programming language in JupyterLite!!
+The `xeus-nelson <https://github.com/jupyter-xeus/xeus-nelson>`_ kernel compiled to wasm and installable in JupyterLite!!
 
 .. replite::
-   :kernel: Nelson
+   :kernel: xeus-nelson
    :height: 600px
 
-   B = ["Nelson", "this"; "is", "string matrix"]
+   fprintf('Hello from xeus-nelson!\n');
 
-Installation
-------------
+.. toctree::
+   :caption: Usage
+   :maxdepth: 2
 
-..  code::
-
-   pip install jupyterlite-xeus-nelson
+   installation
+   deploy
+   configuration

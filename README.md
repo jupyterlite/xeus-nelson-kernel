@@ -1,6 +1,6 @@
-# jupyterlite-xeus-nelson-kernel
+# jupyterlite-xeus-nelson
 
-A NelSon kernel for JupyterLite running in the browser.
+The [xeus-nelson](https://github.com/jupyter-xeus/xeus-nelson) Nelson kernel for JupyterLite running in the browser.
 
 ## Requirements
 
@@ -11,7 +11,7 @@ A NelSon kernel for JupyterLite running in the browser.
 To install the extension, execute:
 
 ```bash
-pip install jupyterlite_xeus_nelson
+pip install jupyterlite-xeus-nelson
 ```
 
 Then build your JupyterLite site:

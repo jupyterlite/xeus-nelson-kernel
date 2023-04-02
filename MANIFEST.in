@@ -1,5 +1,6 @@
 include LICENSE
 include *.md
+include *.yml
 include pyproject.toml
 include package.json
 include install.json
@@ -7,11 +8,15 @@ include ts*.json
 include yarn.lock
 include webpack.config.js
 include worker.webpack.config.js
+include build.js
+recursive-include tests *.py
 
-graft jupyterlite_xeus_lua/labextension
+graft share
+
+graft docs
 
 # Javascript files
-graft src
+include src/*.ts
 graft style
 prune **/node_modules
 prune lib

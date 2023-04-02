@@ -11,7 +11,19 @@ module.exports = {
         {
           from: 'src/xnelson_wasm.js',
           to: '.'
-        }
+        },
+        //{
+        //  from: 'src/nelson_data.js',
+        //  to: '.'
+        //},
+        //{
+        //  from: 'src/*.data',
+        //  to: './[name].data'
+        //},
+        {
+          from: 'src/*.js',
+          to: './[name].js'
+        },
       ]
     })
   ]
