@@ -4,7 +4,7 @@ The [xeus-nelson](https://github.com/jupyter-xeus/xeus-nelson) Nelson kernel for
 
 ## Requirements
 
-- JupyterLite >= 0.1.0b16
+- jupyterlite-core >= 0.1.0b20
 
 ## Install
 
