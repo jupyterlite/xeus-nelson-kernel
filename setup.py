@@ -86,9 +86,6 @@ setup_args = dict(
         "Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt",
     ],
     entry_points={
-        "jupyterlite.addon.v0": [
-            "jupyterlite-xeus-nelson=jupyterlite_xeus_nelson.env_build_addon:XeusNelsonEnv"
-        ],
         "console_scripts": [
             "jupyterlite-xeus-nelson-build=jupyterlite_xeus_nelson.build:start"
         ],

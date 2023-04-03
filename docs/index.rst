@@ -15,4 +15,3 @@ The `xeus-nelson <https://github.com/jupyter-xeus/xeus-nelson>`_ kernel compiled
 
    installation
    deploy
-   configuration
