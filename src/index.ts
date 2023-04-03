@@ -38,22 +38,9 @@ const server_kernel: JupyterLiteServerPlugin<void> = {
         }
       },
       create: async (options: IKernel.IOptions): Promise<IKernel> => {
-        const mountDrive = !!(
-          serviceWorker?.enabled && broadcastChannel?.enabled
-        );
-
-        if (mountDrive) {
-          console.info(
-            'xeus-nelson contents will be synced with Jupyter Contents'
-          );
-        } else {
-          console.warn(
-            'xeus-nelson contents will NOT be synced with Jupyter Contents'
-          );
-        }
         return new WebWorkerKernel({
           ...options,
-          mountDrive
+          mountDrive: false
         });
       }
     });
