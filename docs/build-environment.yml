@@ -6,10 +6,13 @@ channels:
 dependencies:
   - python=3.10
   - pip
+  - click
+  - typer
   - pydata-sphinx-theme
   - yarn
   - jupyterlab
+  - empack >=2.0.9,<3
   - pip:
-    - jupyterlite
+    - jupyterlite-core==0.1.0b20
     - jupyterlite-sphinx
-    - jupyterlite-xeus-nelson
+    - ..

@@ -32,14 +32,6 @@ const server_kernel: JupyterLiteServerPlugin<void> = {
         display_name: 'Nelson',
         language: 'nelson',
         argv: [],
-        spec: {
-          argv: [],
-          env: {},
-          display_name: 'Nelson',
-          language: 'nelson',
-          interrupt_mode: 'message',
-          metadata: {}
-        },
         resources: {
           'logo-32x32': logo32,
           'logo-64x64': logo64

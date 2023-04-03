@@ -1,10 +1,10 @@
 [build-system]
-requires = ["jupyter_packaging~=0.10,<2", "jupyterlab~=3.1"]
+requires = ["jupyter_packaging~=0.10,<2", "jupyterlab~=3.1", "empack>=2.0.9,<3"]
 build-backend = "jupyter_packaging.build_api"
 
 [tool.jupyter-packaging.options]
-skip-if-exists = ["jupyterlite_xeus_nelson/labextension/static/style.js"]
-ensured-targets = ["jupyterlite_xeus_nelson/labextension/static/style.js", "jupyterlite_xeus_nelson/labextension/package.json"]
+skip-if-exists = ["share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/static/style.js"]
+ensured-targets = ["share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/static/style.js", "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/package.json"]
 
 [tool.jupyter-packaging.builder]
 factory = "jupyter_packaging.npm_builder"
@@ -14,5 +14,14 @@ build_cmd = "build:prod"
 npm = ["jlpm"]
 
 [tool.check-manifest]
-ignore = ["jupyterlite_xeus_nelson/labextension/**", "yarn.lock", ".*", "package-lock.json",
-          "src/xnelson_wasm.js", "src/xnelson_wasm.wasm", "src/worker.ts", "src/web_worker_kernel.ts" ,"*.sh"]
+ignore = ["share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/**", "yarn.lock", ".*", "package-lock.json", "src/xnelson_wasm.js", "src/xnelson_wasm.wasm", "src/*.data", "src/*.js", "src/worker.ts", "src/web_worker_kernel.ts", "*.sh"]
+
+[tool.jupyter-releaser.options]
+skip = ["check-links"]
+
+[tool.jupyter-releaser.hooks]
+before-build-npm = [
+    "python -m pip install jupyterlab~=3.1 empack~=2.0 jupyter_packaging~=0.10",
+    "jlpm",
+    "jlpm build:prod",
+]

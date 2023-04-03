@@ -12,18 +12,27 @@ HERE = Path(__file__).parent.resolve()
 # The name of the project
 name = "jupyterlite-xeus-nelson"
 
-lab_path = (HERE / name.replace("-", "_") / "labextension")
+lab_path = (
+    HERE / "share" / "jupyter" / "labextensions" / "@jupyterlite" / "xeus-nelson-kernel"
+)
 
 # Representative files that should exist after a successful build
 ensured_targets = [
     str(lab_path / "package.json"),
-    str(lab_path / "static/style.js")
+#    str(lab_path / "static" / "nelson_data.js"),
+    str(lab_path / "static" / "xnelson_wasm.js"),
+    str(lab_path / "static" / "xnelson_wasm.wasm"),
+    str(lab_path / "static" / "style.js"),
 ]
 
 labext_name = "@jupyterlite/xeus-nelson-kernel"
 
 data_files_spec = [
-    ("share/jupyter/labextensions/%s" % labext_name, str(lab_path.relative_to(HERE)), "**"),
+    (
+        "share/jupyter/labextensions/%s" % labext_name,
+        str(lab_path.relative_to(HERE)),
+        "**",
+    ),
     ("share/jupyter/labextensions/%s" % labext_name, str("."), "install.json"),
 ]
 
@@ -36,23 +45,28 @@ version = (
     .replace("-alpha.", "a")
     .replace("-beta.", "b")
     .replace("-rc.", "rc")
-) 
+)
 
 setup_args = dict(
     name=name,
     version=version,
     url=pkg_json["homepage"],
-    author=pkg_json["author"]["name"],
-    author_email=pkg_json["author"]["email"],
+    author=pkg_json["author"],
     description=pkg_json["description"],
     license=pkg_json["license"],
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=setuptools.find_packages(),
-    install_requires=[],
+    packages=setuptools.find_packages(exclude=["tests"]),
+    install_requires=[
+        "traitlets",
+        "jupyterlite-core>=0.1.0b20",
+        "requests",
+        "empack>=2.0.9,<3",
+        "typer",
+    ],
     zip_safe=False,
     include_package_data=True,
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     platforms="Linux, Mac OS X, Windows",
     keywords=["Jupyter", "JupyterLab", "JupyterLab3"],
     classifiers=[
@@ -63,29 +77,41 @@ setup_args = dict(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Framework :: Jupyter",
         "Framework :: Jupyter :: JupyterLab",
         "Framework :: Jupyter :: JupyterLab :: 3",
         "Framework :: Jupyter :: JupyterLab :: Extensions",
         "Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt",
     ],
+    entry_points={
+        "jupyterlite.addon.v0": [
+            "jupyterlite-xeus-nelson=jupyterlite_xeus_nelson.env_build_addon:XeusNelsonEnv"
+        ],
+        "console_scripts": [
+            "jupyterlite-xeus-nelson-build=jupyterlite_xeus_nelson.build:start"
+        ],
+    },
 )
 
 try:
-    from jupyter_packaging import (
-        wrap_installers,
-        npm_builder,
-        get_data_files
-    )
+    from jupyter_packaging import wrap_installers, npm_builder, get_data_files
+
     post_develop = npm_builder(
-        build_cmd="build:prod", source_dir="src", build_dir=lab_path
+        build_cmd="build:prod", source_dir="src", build_dir=lab_path, npm=["jlpm"]
     )
-    setup_args["cmdclass"] = wrap_installers(post_develop=post_develop, ensured_targets=ensured_targets)
+    setup_args["cmdclass"] = wrap_installers(
+        post_develop=post_develop, ensured_targets=ensured_targets
+    )
     setup_args["data_files"] = get_data_files(data_files_spec)
 except ImportError as e:
     import logging
+
     logging.basicConfig(format="%(levelname)s: %(message)s")
-    logging.warning("Build tool `jupyter-packaging` is missing. Install it with pip or conda.")
+    logging.warning(
+        "Build tool `jupyter-packaging` is missing. Install it with pip or conda."
+    )
     if not ("--name" in sys.argv or "--version" in sys.argv):
         raise e
 
