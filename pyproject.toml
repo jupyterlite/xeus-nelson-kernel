@@ -1,23 +1,96 @@
 [build-system]
-requires = ["jupyter_packaging~=0.10,<2", "jupyterlab~=3.1", "empack>=2.0.9,<3"]
-build-backend = "jupyter_packaging.build_api"
+requires = [
+    "hatchling",
+    "jupyterlab~=3.1",
+    "empack>=2.0.9,<3",
+]
+build-backend = "hatchling.build"
 
-[tool.jupyter-packaging.options]
-skip-if-exists = ["share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/static/style.js"]
-ensured-targets = ["share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/static/style.js", "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/package.json"]
+[project]
+name = "jupyterlite-xeus-nelson"
+description = "A Nelson kernel for JupyterLite, powered by Xeus"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    { name = "JupyterLite Contributors" },
+]
+keywords = [
+    "Jupyter",
+    "JupyterLab",
+    "JupyterLab3",
+]
+classifiers = [
+    "Framework :: Jupyter",
+    "Framework :: Jupyter :: JupyterLab",
+    "Framework :: Jupyter :: JupyterLab :: 3",
+    "Framework :: Jupyter :: JupyterLab :: Extensions",
+    "Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "empack>=2.0.9,<3",
+    "jupyterlite-core>=0.1.0b20",
+    "requests",
+    "traitlets",
+    "typer",
+]
+version = "0.1.3"
 
-[tool.jupyter-packaging.builder]
-factory = "jupyter_packaging.npm_builder"
+[project.license]
+file = "LICENSE"
 
-[tool.jupyter-packaging.build-args]
+[project.urls]
+Homepage = "https://github.com/jupyterlite/xeus-nelson-kernel"
+
+[tool.hatch.build.targets.wheel.shared-data]
+"share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/static" = "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/static"
+"install.json" = "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/install.json"
+"share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/package.json" = "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/package.json"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    ".github",
+]
+
+[tool.hatch.build.hooks.jupyter-builder]
+dependencies = [
+    "hatch-jupyter-builder>=0.8.2",
+]
+build-function = "hatch_jupyter_builder.npm_builder"
+ensured-targets = [
+    "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/static/style.js",
+    "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/package.json",
+]
+skip-if-exists = [
+    "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/static/style.js",
+]
+
+[tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
+build_dir = "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel"
+source_dir = "src"
 build_cmd = "build:prod"
-npm = ["jlpm"]
+npm = [
+    "jlpm",
+]
 
-[tool.check-manifest]
-ignore = ["share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/**", "yarn.lock", ".*", "package-lock.json", "src/xnelson_wasm.js", "src/xnelson_wasm.wasm", "src/*.data", "src/*.js", "src/worker.ts", "src/web_worker_kernel.ts", "*.sh"]
+[tool.hatch.build.hooks.jupyter-builder.build-kwargs]
+build_cmd = "build:prod"
+npm = [
+    "jlpm",
+]
 
 [tool.jupyter-releaser.options]
-skip = ["check-links"]
+skip = [
+    "check-links",
+]
 
 [tool.jupyter-releaser.hooks]
 before-build-npm = [
@@ -25,3 +98,25 @@ before-build-npm = [
     "jlpm",
     "jlpm build:prod",
 ]
+
+[tool.tbump]
+field = [
+    { name = "channel", default = "" },
+    { name = "release", default = "" },
+]
+
+[tool.tbump.version]
+current = "0.1.3"
+regex = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)((?P<channel>a|b|rc|.dev)(?P<release>\\d+))?"
+
+[tool.tbump.git]
+message_template = "Bump to {new_version}"
+tag_template = "v{new_version}"
+
+[[tool.tbump.file]]
+src = "pyproject.toml"
+version_template = "version = \"{major}.{minor}.{patch}{channel}{release}\""
+
+[[tool.tbump.file]]
+src = "package.json"
+version_template = "\"version\": \"{major}.{minor}.{patch}{channel}{release}\""
