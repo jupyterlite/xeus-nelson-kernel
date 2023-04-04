@@ -23,7 +23,7 @@ module.exports = {
         {
           from: 'src/*.js',
           to: './[name].js'
-        },
+        }
       ]
     })
   ]

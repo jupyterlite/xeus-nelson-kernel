@@ -17,10 +17,7 @@ const server_kernel: JupyterLiteServerPlugin<void> = {
   id: '@jupyterlite/xeus-nelson-kernel-extension:kernel',
   autoStart: true,
   requires: [IKernelSpecs],
-  activate: (
-    app: JupyterLiteServer,
-    kernelspecs: IKernelSpecs,
-  ) => {
+  activate: (app: JupyterLiteServer, kernelspecs: IKernelSpecs) => {
     kernelspecs.register({
       spec: {
         name: 'Nelson',
