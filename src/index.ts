@@ -3,11 +3,9 @@
 // Distributed under the terms of the Modified BSD License.
 
 import {
-  IServiceWorkerManager,
   JupyterLiteServer,
   JupyterLiteServerPlugin
 } from '@jupyterlite/server';
-import { IBroadcastChannelWrapper } from '@jupyterlite/contents';
 import { IKernel, IKernelSpecs } from '@jupyterlite/kernel';
 
 import { WebWorkerKernel } from './web_worker_kernel';
@@ -19,12 +17,9 @@ const server_kernel: JupyterLiteServerPlugin<void> = {
   id: '@jupyterlite/xeus-nelson-kernel-extension:kernel',
   autoStart: true,
   requires: [IKernelSpecs],
-  optional: [IServiceWorkerManager, IBroadcastChannelWrapper],
   activate: (
     app: JupyterLiteServer,
     kernelspecs: IKernelSpecs,
-    serviceWorker?: IServiceWorkerManager,
-    broadcastChannel?: IBroadcastChannelWrapper
   ) => {
     kernelspecs.register({
       spec: {
