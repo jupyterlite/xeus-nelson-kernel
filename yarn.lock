@@ -271,7 +271,7 @@
     "@lumino/properties" "^1.8.0"
     "@lumino/signaling" "^1.10.0"
 
-"@jupyterlite/contents@^0.1.0-beta.18", "@jupyterlite/contents@^0.1.0-rc.0":
+"@jupyterlite/contents@^0.1.0-beta.20", "@jupyterlite/contents@^0.1.0-rc.0":
   version "0.1.0-rc.0"
   resolved "https://registry.yarnpkg.com/@jupyterlite/contents/-/contents-0.1.0-rc.0.tgz#b41621cdf001e7861df84c4b2f6d8d9a4307f2cf"
   integrity sha512-B/TZboRyIW+/+4L4Ult6oBLu1netzNDO2QTWNJXEZYnYll2tH27KKh5puV+hbihGvZzNBmqGNIJiaPKYQghPag==
@@ -309,7 +309,7 @@
     localforage "^1.9.0"
     localforage-memoryStorageDriver "^0.9.2"
 
-"@jupyterlite/server@^0.1.0-beta.18":
+"@jupyterlite/server@^0.1.0-beta.20":
   version "0.1.0-rc.0"
   resolved "https://registry.yarnpkg.com/@jupyterlite/server/-/server-0.1.0-rc.0.tgz#e410e29cccc9be11192317e39613cfd08269abeb"
   integrity sha512-pKmxbAtEM0JQW9zjrAkwd3L7dpnhPT0XXsCuBorJK7YMvTFmmi/xHQa+Zcif+9DViay51AALR5bFXkc6GTQDxw==
