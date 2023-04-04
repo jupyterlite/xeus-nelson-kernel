@@ -9,7 +9,6 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jupyterlite-xeus-nelson"
-description = "A Nelson kernel for JupyterLite, powered by Xeus"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.8"
