@@ -3,11 +3,9 @@
 // Distributed under the terms of the Modified BSD License.
 
 import {
-  IServiceWorkerManager,
   JupyterLiteServer,
   JupyterLiteServerPlugin
 } from '@jupyterlite/server';
-import { IBroadcastChannelWrapper } from '@jupyterlite/contents';
 import { IKernel, IKernelSpecs } from '@jupyterlite/kernel';
 
 import { WebWorkerKernel } from './web_worker_kernel';
@@ -19,13 +17,7 @@ const server_kernel: JupyterLiteServerPlugin<void> = {
   id: '@jupyterlite/xeus-nelson-kernel-extension:kernel',
   autoStart: true,
   requires: [IKernelSpecs],
-  optional: [IServiceWorkerManager, IBroadcastChannelWrapper],
-  activate: (
-    app: JupyterLiteServer,
-    kernelspecs: IKernelSpecs,
-    serviceWorker?: IServiceWorkerManager,
-    broadcastChannel?: IBroadcastChannelWrapper
-  ) => {
+  activate: (app: JupyterLiteServer, kernelspecs: IKernelSpecs) => {
     kernelspecs.register({
       spec: {
         name: 'Nelson',
@@ -38,22 +30,9 @@ const server_kernel: JupyterLiteServerPlugin<void> = {
         }
       },
       create: async (options: IKernel.IOptions): Promise<IKernel> => {
-        const mountDrive = !!(
-          serviceWorker?.enabled && broadcastChannel?.enabled
-        );
-
-        if (mountDrive) {
-          console.info(
-            'xeus-nelson contents will be synced with Jupyter Contents'
-          );
-        } else {
-          console.warn(
-            'xeus-nelson contents will NOT be synced with Jupyter Contents'
-          );
-        }
         return new WebWorkerKernel({
           ...options,
-          mountDrive
+          mountDrive: false
         });
       }
     });
