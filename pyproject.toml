@@ -37,7 +37,6 @@ source = "nodejs"
 [tool.hatch.build.hooks.version]
 path = "jupyterlite_xeus_nelson/_version.py"
 
-
 [tool.hatch.build]
 artifacts = [
     "jupyterlite_xeus_nelson/labextension",
