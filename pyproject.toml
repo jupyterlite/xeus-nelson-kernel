@@ -37,6 +37,12 @@ source = "nodejs"
 [tool.hatch.build.hooks.version]
 path = "jupyterlite_xeus_nelson/_version.py"
 
+
+[tool.hatch.build]
+artifacts = [
+    "jupyterlite_xeus_nelson/labextension",
+]
+
 [tool.hatch.build.targets.wheel.shared-data]
 "jupyterlite_xeus_nelson/labextension" = "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel"
 "install.json" = "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/install.json"
