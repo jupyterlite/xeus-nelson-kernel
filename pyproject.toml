@@ -52,15 +52,15 @@ dependencies = [
 ]
 build-function = "hatch_jupyter_builder.npm_builder"
 ensured-targets = [
-    "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/static/style.js",
-    "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/package.json",
+    "jupyterlite_xeus_nelson/labextension/static/style.js",
+    "jupyterlite_xeus_nelson/labextension/package.json",
 ]
 skip-if-exists = [
-    "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/static/style.js",
+    "jupyterlite_xeus_nelson/labextension/static/style.js",
 ]
 
 [tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
-build_dir = "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel"
+build_dir = "jupyterlite_xeus_nelson/labextension"
 source_dir = "src"
 build_cmd = "build:prod"
 npm = [
@@ -71,11 +71,6 @@ npm = [
 build_cmd = "build:prod"
 npm = [
     "jlpm",
-]
-
-[tool.jupyter-releaser.options]
-skip = [
-    "check-links",
 ]
 
 [tool.jupyter-releaser.hooks]
