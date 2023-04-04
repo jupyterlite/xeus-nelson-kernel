@@ -125,3 +125,6 @@ src/web_worker_kernel.ts
 # Labextension
 share
 labextension
+
+# generated
+jupyterlite_xeus_nelson/_version.py
