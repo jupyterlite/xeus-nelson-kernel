@@ -38,9 +38,8 @@ source = "nodejs"
 path = "jupyterlite_xeus_nelson/_version.py"
 
 [tool.hatch.build.targets.wheel.shared-data]
-"share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/static" = "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/static"
+"jupyterlite_xeus_nelson/labextension" = "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel"
 "install.json" = "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/install.json"
-"share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/package.json" = "share/jupyter/labextensions/@jupyterlite/xeus-nelson-kernel/package.json"
 
 [tool.hatch.build.targets.sdist]
 exclude = [
